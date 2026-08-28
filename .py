@@ -16,7 +16,7 @@ bot = telebot.TeleBot(TOKEN, parse_mode="HTML")
 
 # Put YOUR Telegram user ID here.
 # You can get it by messaging @userinfobot on Telegram.
-OWNER_ID = 123456789
+OWNER_ID = 7568268218
 
 DB = "bot.db"
 
