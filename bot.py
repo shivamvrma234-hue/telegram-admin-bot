@@ -9,7 +9,25 @@ BOT_TOKEN = os.getenv("BOT_TOKEN", "PUT_YOUR_BOT_TOKEN_HERE")
 OWNER_ID = 7568268218
 
 bot = telebot.TeleBot(BOT_TOKEN, parse_mode="HTML")
+@bot.message_handler(commands=["checkbot"])
+def checkbot(message):
+    try:
+        me = bot.get_me()
+        member = bot.get_chat_member(message.chat.id, me.id)
 
+        bot.reply_to(
+            message,
+            f"🤖 Bot: {me.first_name}\n"
+            f"📌 Status: {member.status}\n"
+            f"👑 Can promote: {getattr(member, 'can_promote_members', False)}\n"
+            f"🚫 Can restrict: {getattr(member, 'can_restrict_members', False)}\n"
+            f"🗑 Can delete: {getattr(member, 'can_delete_messages', False)}\n"
+            f"📨 Can invite: {getattr(member, 'can_invite_users', False)}\n"
+            f"📌 Can pin: {getattr(member, 'can_pin_messages', False)}"
+        )
+
+    except Exception as e:
+        bot.reply_to(message, f"❌ Error:\n{e}")
 
 # =========================================================
 # DATABASE
