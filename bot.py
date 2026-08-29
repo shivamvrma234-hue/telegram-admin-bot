@@ -19,11 +19,11 @@ def checkbot(message):
             message,
             f"🤖 Bot: {me.first_name}\n"
             f"📌 Status: {member.status}\n"
-            f"👑 Can promote: {getattr(member, 'can_promote_members', False)}\n"
-            f"🚫 Can restrict: {getattr(member, 'can_restrict_members', False)}\n"
-            f"🗑 Can delete: {getattr(member, 'can_delete_messages', False)}\n"
-            f"📨 Can invite: {getattr(member, 'can_invite_users', False)}\n"
-            f"📌 Can pin: {getattr(member, 'can_pin_messages', False)}"
+            f"👑 Can promote: {getattr(member, 'can_promote_members', True)}\n"
+            f"🚫 Can restrict: {getattr(member, 'can_restrict_members', True)}\n"
+            f"🗑 Can delete: {getattr(member, 'can_delete_messages', True)}\n"
+            f"📨 Can invite: {getattr(member, 'can_invite_users', True)}\n"
+            f"📌 Can pin: {getattr(member, 'can_pin_messages', True)}"
         )
 
     except Exception as e:
