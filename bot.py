@@ -422,7 +422,7 @@ def promote(message):
             can_pin_messages=True,
             can_manage_video_chats=True,
             can_manage_topics=True,
-            can_promote_members=False
+            can_promote_members=True,
         )
 
         bot.reply_to(
