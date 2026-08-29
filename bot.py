@@ -170,58 +170,122 @@ def start(message):
 # =========================================================
 
 @bot.message_handler(commands=["help"])
-def help_command(message):
+HELP_TEXT = """
+🛡️ <b>AdminBot — Help</b>
 
-    text = """
-🤖 <b>GROUP MANAGEMENT BOT</b>
+━━━ <b>Group Management</b> ━━━
+<code>/promote [user]</code> — Promote to admin
+  Group: reply or <code>/promote @user</code> / ID
+  DM: <code>/promote</code> or <code>/promote ID</code>, then pick group
 
-👑 <b>Owner</b>
-• Everything
+<code>/demote [user]</code> — Remove admin rights
+  Same usage as /promote
 
-🛡️ <b>Moderator</b>
-• Ban
-• Unban
-• Mute
-• Unmute
-• Delete
-• Purge
-• Promote
-• Demote
+━━━ <b>Moderation</b> ━━━
+<code>/ban [user]</code> — Ban a user
+  Group: reply · DM: <code>/ban ID</code>, pick group
 
-🔧 <b>Manager</b>
-• Ban
-• Unban
-• Mute
-• Unmute
-• Delete
-• Purge
-• Demote
+<code>/unban &lt;ID&gt;</code> — Unban a user
+  Group: reply or <code>/unban ID</code> · DM: <code>/unban ID</code>
 
-🧹 <b>Helper</b>
-• Ban
-• Unban
-• Mute
-• Unmute
-• Delete
+<code>/mute [user]</code> — Mute a user
+  Group: reply · DM: <code>/mute ID</code>, pick group &amp; duration
 
-<b>Commands</b>
+<code>/unmute &lt;ID&gt;</code> — Unmute a user
+  Group: reply or <code>/unmute ID</code> · DM: <code>/unmute ID</code>
 
-/promote
-/demote
-/ban
-/unban
-/mute
-/unmute
-/del
-/purge
-/delban
-/id
-/admins
+<code>/del</code> — Delete a message
+  Group only: reply to the message
 
-Reply to a user's message when using moderation commands.
+<code>/purge &lt;count&gt;</code> — Bulk delete messages
+  Group only · Reply sets start point (backwards)
+
+<code>/delban [reason]</code> — Delete message + ban
+  Group only: reply to the message
+
+<code>/delmute [reason]</code> — Delete message + mute
+  Group only: reply, then pick duration
+
+<code>/delwarn [reason]</code> — Delete message + warn
+  Group only: reply to the message
+
+<code>/warn [reason]</code> — Warn a user
+  Group only: reply to the message
+
+<code>/warnings [user]</code> — View warnings for a user
+  Group: reply or <code>/warnings ID</code> · DM: <code>/warnings ID</code>
+
+<code>/warnconfig</code> — Auto-action on warning threshold
+  Set max warnings &amp; action (ban/mute/kick)
+
+<code>/pin</code> — Pin a message
+  Group only: reply to the message
+
+<code>/unpin</code> — Unpin a message
+  Group only: reply to the message
+
+━━━ <b>Invite Links</b> ━━━
+<code>/invite</code> — Create an invite link
+  Choose between approval-required or direct join
+
+<code>/deletelink</code> — Delete your own links
+  Or: <code>/deletelink &lt;link&gt;</code> to delete a specific one
+
+<code>/listlinks</code> — List all invite links with URLs
+
+<code>/managelinks</code> — Toggle approval on existing links
+
+<code>/revokeinvites</code> — Revoke all invite links in a group
+
+━━━ <b>Activity Tracking</b> ━━━
+<code>/mediaactivity</code> — Configure media quotas
+  DM: pick group, enable/disable, set thresholds
+  Tracks photos &amp; videos per user
+  Users who fail quotas are auto-removed
+
+<code>/removals</code> — View removed users history
+  Shows new removals since your last check
+
+<code>/repeats</code> — Users removed in 2+ groups
+  Lists repeat offenders across all groups
+
+<code>/exclude &lt;ID&gt;</code> — Exclude a user from all quotas
+  Group: reply or <code>/exclude ID</code> · DM: <code>/exclude ID</code>
+  <code>/exclude ID all</code> — exclude from all current + future groups
+  Remove exclusions via /mediaactivity → Exemptions
+
+━━━ <b>Settings</b> ━━━
+<code>/settings</code> — Unified settings menu
+  Warnings, media activity &amp; invite links in one place
+
+━━━ <b>Admin Management</b> ━━━
+<code>/addadmin &lt;ID&gt;</code> — Add or update a bot admin
+
+<code>/removeadmin</code> — Remove a bot admin
+
+<code>/listadmins</code> — List all bot admins by role
+
+<code>/removegroups</code> — Remove deleted groups from DB
+
+<code>/debug</code> — System diagnostics
+
+━━━ <b>Info</b> ━━━
+<b>Role:</b> Super Admin · <b>ID:</b> 7568268218
+
+<b>Roles:</b> Super Admin &gt; Admin &gt; Limited Admin
+
+🔒 Commands auto-delete in groups for privacy.
 """
 
-    bot.reply_to(message, text)
+
+@bot.message_handler(commands=["help"])
+def help_command(message):
+    bot.send_message(
+        message.chat.id,
+        HELP_TEXT,
+        parse_mode="HTML",
+        disable_web_page_preview=True
+    )
 
 
 # =========================================================
